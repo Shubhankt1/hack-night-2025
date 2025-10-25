@@ -11,4 +11,12 @@ export default defineSchema({
     author: v.string(),
     date: v.string(),
   }).index("by_repo", ["owner", "repo"]),
+
+  shoutouts: defineTable({
+    text: v.string(),
+    user: v.string(),
+    userName: v.string(),
+    timestamp: v.string(),
+    channelId: v.string(),
+  }).index("by_timestamp", ["timestamp"]),
 });

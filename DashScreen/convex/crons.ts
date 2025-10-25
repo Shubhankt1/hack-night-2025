@@ -10,4 +10,12 @@ crons.hourly(
   { owner: "Shubhankt1", repo: "shubhankt1.github.io", branch: "migrate" }
 );
 
+// Sync Slack shoutouts every minute
+crons.interval(
+  "sync-slack-shoutouts",
+  { minutes: 1 },
+  internal.slackActions.fetchAndStoreShoutouts,
+  { limit: 10 }
+);
+
 export default crons;

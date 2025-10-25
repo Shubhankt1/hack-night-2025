@@ -10,6 +10,8 @@
 
 import type * as crons from "../crons.js";
 import type * as github from "../github.js";
+import type * as slack from "../slack.js";
+import type * as slackActions from "../slackActions.js";
 
 import type {
   ApiFromModules,
@@ -28,6 +30,8 @@ import type {
 declare const fullApi: ApiFromModules<{
   crons: typeof crons;
   github: typeof github;
+  slack: typeof slack;
+  slackActions: typeof slackActions;
 }>;
 declare const fullApiWithMounts: typeof fullApi;
 
