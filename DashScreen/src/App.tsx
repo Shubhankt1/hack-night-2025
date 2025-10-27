@@ -1,6 +1,7 @@
 import { Card } from "./components/Card";
 import { CommitsList } from "./components/CommitsLists";
 import { ShoutoutsList } from "./components/ShoutoutsList";
+import { Weather } from "./components/Weather";
 
 function App() {
   return (
@@ -34,9 +35,9 @@ function App() {
 
           {/* Card 3 */}
           <div className="md:col-span-1 lg:col-span-1 2xl:col-span-2">
-            <Card title="Issues">
-              <div className="text-gray-500 text-center py-8">
-                Coming soon...
+            <Card title="Weather">
+              <div className="text-gray-500 text-center">
+                <Weather />
               </div>
             </Card>
           </div>

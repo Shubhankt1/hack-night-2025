@@ -18,4 +18,16 @@ crons.interval(
   { limit: 10 }
 );
 
+// Weather cron (optional)
+// crons.interval(
+//   "sync-weather",
+//   { minutes: 30 },
+//   internal.weather.fetchAndStoreWeather, // Changed from weatherActions
+//   {
+//     latitude: 42.3314,
+//     longitude: -71.0995,
+//     location: "Boston",
+//   }
+// );
+
 export default crons;

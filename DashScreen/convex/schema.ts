@@ -19,4 +19,27 @@ export default defineSchema({
     timestamp: v.string(),
     channelId: v.string(),
   }).index("by_timestamp", ["timestamp"]),
+
+  weather: defineTable({
+    location: v.string(),
+    latitude: v.number(),
+    longitude: v.number(),
+    temperature: v.number(),
+    feelsLike: v.number(),
+    description: v.string(),
+    humidity: v.number(),
+    windSpeed: v.number(),
+    precipitation: v.number(),
+    timestamp: v.number(),
+    // Forecast data (next 3 days)
+    forecast: v.array(
+      v.object({
+        date: v.string(),
+        maxTemp: v.number(),
+        minTemp: v.number(),
+        precipitation: v.number(),
+        weatherCode: v.number(),
+      })
+    ),
+  }).index("by_location", ["location"]),
 });

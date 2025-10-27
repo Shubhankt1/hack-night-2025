@@ -8,12 +8,12 @@ interface CardProps {
 export function Card({ title, children, className = "" }: CardProps) {
   return (
     <div
-      className={`bg-white rounded-lg shadow-md overflow-hidden ${className}`}
+      className={`bg-white rounded-lg shadow-md overflow-hidden h-96 flex flex-col ${className}`}
     >
-      <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
+      <div className="px-6 py-4 border-b border-gray-200 bg-gray-50 flex-shrink-0">
         <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
       </div>
-      <div className="p-6 overflow-y-auto max-h-96">{children}</div>
+      <div className="p-6 overflow-y-auto flex-1">{children}</div>
     </div>
   );
 }

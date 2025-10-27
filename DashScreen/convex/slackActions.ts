@@ -91,7 +91,7 @@ export const fetchAndStoreShoutouts = internalAction({
         throw new Error("No messages found");
       }
 
-      console.log(result);
+      //   console.log(result);
 
       const shoutouts = await Promise.all(
         result.messages

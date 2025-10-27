@@ -12,6 +12,7 @@ import type * as crons from "../crons.js";
 import type * as github from "../github.js";
 import type * as slack from "../slack.js";
 import type * as slackActions from "../slackActions.js";
+import type * as weather from "../weather.js";
 
 import type {
   ApiFromModules,
@@ -32,6 +33,7 @@ declare const fullApi: ApiFromModules<{
   github: typeof github;
   slack: typeof slack;
   slackActions: typeof slackActions;
+  weather: typeof weather;
 }>;
 declare const fullApiWithMounts: typeof fullApi;
 
