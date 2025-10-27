@@ -8,8 +8,10 @@
  * @module
  */
 
+import type * as auth from "../auth.js";
 import type * as crons from "../crons.js";
 import type * as github from "../github.js";
+import type * as http from "../http.js";
 import type * as slack from "../slack.js";
 import type * as slackActions from "../slackActions.js";
 import type * as weather from "../weather.js";
@@ -29,8 +31,10 @@ import type {
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  auth: typeof auth;
   crons: typeof crons;
   github: typeof github;
+  http: typeof http;
   slack: typeof slack;
   slackActions: typeof slackActions;
   weather: typeof weather;

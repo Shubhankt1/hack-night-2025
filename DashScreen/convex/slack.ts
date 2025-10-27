@@ -1,6 +1,7 @@
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
 import { internalMutation, mutation, query } from "./_generated/server";
+import { getAuthUserId } from "@convex-dev/auth/server";
 
 // Internal Mutation: Store shoutouts in the database
 export const storeShoutouts = internalMutation({
@@ -46,6 +47,10 @@ export const triggerShoutoutSync = mutation({
     channelId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) {
+      throw new Error("Not authenticated");
+    }
     await ctx.scheduler.runAfter(
       0,
       internal.slackActions.fetchAndStoreShoutouts,
@@ -64,6 +69,10 @@ export const getShoutouts = query({
     limit: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) {
+      return null; // Not authenticated
+    }
     return await ctx.db
       .query("shoutouts")
       .withIndex("by_timestamp")

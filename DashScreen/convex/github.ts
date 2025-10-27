@@ -9,6 +9,7 @@ import {
   internalAction,
   internalMutation,
 } from "./_generated/server";
+import { getAuthUserId } from "@convex-dev/auth/server";
 
 // Mutation: Store commits in the database
 export const storeCommits = internalMutation({
@@ -88,6 +89,10 @@ export const fetchAndStoreCommits = internalAction({
 export const getCommits = query({
   args: { owner: v.string(), repo: v.string() },
   handler: async (ctx, args) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) {
+      return null; // Not authenticated
+    }
     return await ctx.db
       .query("commits")
       .withIndex("by_repo", (q) =>
@@ -102,6 +107,10 @@ export const getCommits = query({
 export const triggerCommitSync = action({
   args: { owner: v.string(), repo: v.string(), branch: v.string() },
   handler: async (ctx, args) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) {
+      throw new Error("Not authenticated");
+    }
     await ctx.scheduler.runAfter(0, internal.github.fetchAndStoreCommits, {
       owner: args.owner,
       repo: args.repo,

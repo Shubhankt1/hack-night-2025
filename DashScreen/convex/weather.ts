@@ -6,6 +6,7 @@ import {
   mutation,
   query,
 } from "./_generated/server";
+import { getAuthUserId } from "@convex-dev/auth/server";
 
 // Helper to get weather description from WMO code
 function getWeatherDescription(code: number): string {
@@ -169,6 +170,10 @@ export const getWeatherForLocation = mutation({
     longitude: v.number(),
   },
   handler: async (ctx, args) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) {
+      throw new Error("Not authenticated");
+    }
     // Check if we have recent cached weather data (within 50km and less than 12 hours old)
     const allWeather = await ctx.db.query("weather").collect();
 
@@ -224,6 +229,10 @@ export const getWeather = query({
     location: v.string(),
   },
   handler: async (ctx, args) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) {
+      return null; // Not authenticated
+    }
     return await ctx.db
       .query("weather")
       .withIndex("by_location", (q) => q.eq("location", args.location))
@@ -235,6 +244,10 @@ export const getWeather = query({
 export const getLatestWeather = query({
   args: {},
   handler: async (ctx) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) {
+      return null; // Not authenticated
+    }
     const allWeather = await ctx.db.query("weather").collect();
 
     if (allWeather.length === 0) {
