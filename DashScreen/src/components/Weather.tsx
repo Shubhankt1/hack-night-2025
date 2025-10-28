@@ -163,11 +163,11 @@ export function Weather() {
                       <span className="font-semibold">{day.maxTemp}°</span>
                       <span className="text-gray-500">{day.minTemp}°</span>
                     </div>
-                    {day.precipitation > 0 && (
+                    {(day.precipitation > 0 && (
                       <span className="text-xs text-blue-600">
                         {day.precipitation}"
                       </span>
-                    )}
+                    )) || <span className="text-xs text-blue-600">0.0"</span>}
                   </div>
                 ))}
               </div>
