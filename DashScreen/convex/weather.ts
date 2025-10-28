@@ -223,23 +223,6 @@ export const getWeatherForLocation = mutation({
   },
 });
 
-// Query: Get weather data by location name
-export const getWeather = query({
-  args: {
-    location: v.string(),
-  },
-  handler: async (ctx, args) => {
-    const userId = await getAuthUserId(ctx);
-    if (!userId) {
-      return null; // Not authenticated
-    }
-    return await ctx.db
-      .query("weather")
-      .withIndex("by_location", (q) => q.eq("location", args.location))
-      .first();
-  },
-});
-
 // Query: Get latest weather (for any location)
 export const getLatestWeather = query({
   args: {},

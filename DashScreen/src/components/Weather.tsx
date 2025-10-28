@@ -94,7 +94,7 @@ export function Weather() {
         <div className="text-gray-500 text-center py-8">Loading weather...</div>
       ) : !weather ? (
         <div className="text-gray-500 text-center py-8">
-          Fetching weather data...
+          Fetching weather data... You may try to refresh...
         </div>
       ) : (
         <div className="space-y-4">

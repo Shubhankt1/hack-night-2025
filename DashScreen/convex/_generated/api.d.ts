@@ -14,6 +14,7 @@ import type * as github from "../github.js";
 import type * as http from "../http.js";
 import type * as slack from "../slack.js";
 import type * as slackActions from "../slackActions.js";
+import type * as userSettings from "../userSettings.js";
 import type * as weather from "../weather.js";
 
 import type {
@@ -37,6 +38,7 @@ declare const fullApi: ApiFromModules<{
   http: typeof http;
   slack: typeof slack;
   slackActions: typeof slackActions;
+  userSettings: typeof userSettings;
   weather: typeof weather;
 }>;
 declare const fullApiWithMounts: typeof fullApi;
