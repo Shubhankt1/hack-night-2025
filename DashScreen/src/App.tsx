@@ -15,8 +15,6 @@ import {
 import { Settings, LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
 import { api } from "../convex/_generated/api";
-// import { api } from "../convex/_generated/api";
-// import { useEffect } from "react";
 
 function App() {
   return (
@@ -51,44 +49,39 @@ function Dashboard() {
   }, [initSettings]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 relative overflow-hidden">
+      {/* Spiderweb PNG in top-right corner */}
+      <img
+        src="/spiderweb.png"
+        alt=""
+        className="absolute top-0 left-0 w-[50%] opacity-20 pointer-events-none"
+      />
+
+      <div className="container mx-auto px-4 py-8 relative z-10">
         {/* Header */}
         <header className="mb-8 flex justify-between items-start">
           <div>
-            <h1 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-900">
-              Welcome, {settings?.displayName || ""}
+            <h1 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-orange-600">
+              🎃 Welcome, {settings?.displayName || ""} 👻
             </h1>
-            <p className="text-gray-600 mt-2 lg:text-lg xl:text-xl 2xl:text-2xl">
-              Monitor everything here...
+            <p className="text-gray-700 mt-2 lg:text-lg xl:text-xl 2xl:text-2xl">
+              Monitor everything here... if you dare 🦇
             </p>
           </div>
           <div className="flex items-center gap-3">
             <button
               onClick={() => setShowSettings(true)}
-              className="px-3 py-3 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition flex items-center gap-2"
+              className="px-3 py-3 bg-white text-orange-600 rounded hover:bg-orange-50 transition border-2 border-orange-500"
               title="Settings"
             >
               <Settings className="w-4 h-4" />
             </button>
             <button
               onClick={() => signOut()}
-              className="px-3 py-3 bg-red-600 text-white rounded hover:bg-red-700 transition"
+              className="px-3 py-3 bg-orange-600 text-white rounded hover:bg-orange-700 transition"
               title="Sign Out"
             >
               <LogOut className="w-4 h-4" />
-              {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                <polyline points="16 17 21 12 16 7" />
-                <line x1="21" y1="12" x2="9" y2="12" />
-              </svg> */}
             </button>
           </div>
         </header>
