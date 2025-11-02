@@ -34,35 +34,126 @@ Build an app for Screens, Envoy's upcoming digital signage platform.
 2. \_<!-- Team member (optional) -->
 3. \_<!-- Team member (optional) -->
 
-### App name
+# Envoy Screens Dashboard
 
-<!-- App name -->
+A real-time monitoring dashboard built for Envoy Screens, displaying GitHub commits, Slack shoutouts, and weather forecasts.
 
-### App description (optional)
+## Prerequisites
 
-<!-- App description -->
+- Node.js (v18 or higher)
+- npm or pnpm
+- GitHub account (for OAuth)
+- Slack workspace access (optional)
+- Convex account
 
-<br/>
+## Installation
 
----
+1. **Clone the repository**
 
-<br/>
+```bash
+   git clone <your-repo-url>
+   cd envoy-screens-dashboard
+```
 
-### App ideas
+2. **Install dependencies**
 
-- Social wall: Instagram, Facebook, X, etc. social posts in a scrolling live feed
-- Birthdays: Employee birthdays this week
-- Weather: The weather right now at that location
-- Countdown: Countdown clock with a description of what it's counting down to
-- Transit: Local bus, train, etc. routes and their next departure time
-- Live TV: Stream live TV over IP
-- Stock: Live stock performance for a specific stock
-- News ticker: Latest headlines from a TechCrunch, Reuters, NYT, etc.
-- Slack Shoutouts: Spotlight shoutouts or kudos messages in real time
-- Energy dashboard: Live office power usage, temperature, etc.
-- Food menus: Today’s cafeteria menu, nearby restaurants’ lunch specials
-- Fun facts/trivia: Random facts or quizzes
-- Quote of the day: A random quote of the day
-- Music: Play a music with cool on-screen graphics
-- Mood board: Live office sentiment via reactions (smiley/frown counts)
-- AI art: Generate a new AI image every day as an art wall
+```bash
+   npm install
+```
+
+3. **Set up Convex**
+
+```bash
+   npx convex dev
+```
+
+- Follow the prompts to create a new Convex project
+- This will create a `.env.local` file with `VITE_CONVEX_URL`
+
+4. **Configure Google OAuth**
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create OAuth credentials
+   - Add authorized redirect URIs:
+     - `http://localhost:5173/api/auth/callback/google`
+     - `https://your-deployment.convex.site/api/auth/callback/google`
+   - Add environment variables in Convex Dashboard:
+
+```
+     AUTH_GOOGLE_ID=your-google-client-id
+     AUTH_GOOGLE_SECRET=your-google-client-secret
+     SITE_URL=http://localhost:5173
+```
+
+5. **Configure GitHub API** (in Convex Dashboard)
+
+```
+   GITHUB_ACCESS_TOKEN=your-github-token
+```
+
+6. **Configure Slack API** (in Convex Dashboard)
+
+```
+   SLACK_BOT_TOKEN=xoxb-your-token
+   SLACK_CHANNEL_ID=C1234567890
+```
+
+## Running Development Server
+
+1. **Start Convex backend**
+
+```bash
+   npm run dev:backend
+```
+
+2. **Start frontend (in another terminal)**
+
+```bash
+   npm run dev:frontend
+```
+
+3. **Or run both together**
+
+```bash
+   npm run dev
+```
+
+4. **Open your browser**
+
+```
+   http://localhost:5173
+```
+
+## Building for Production
+
+```bash
+npm run build
+```
+
+## Tech Stack
+
+- **Frontend**: React, TypeScript, Vite, Tailwind CSS
+- **Backend**: Convex (database, auth, serverless functions, cron jobs)
+- **APIs**: GitHub API, Slack API, Open-Meteo Weather API
+- **Auth**: Convex Auth with Google OAuth
+
+## Features
+
+- ✅ Real-time GitHub commit monitoring
+- ✅ Slack shoutouts from team channels
+- ✅ Weather forecasts with 3-day outlook
+- ✅ User authentication with Google
+- ✅ Customizable settings per user
+- ✅ Automatic data syncing via cron jobs
+
+## Environment Variables
+
+Create these in the Convex Dashboard (Settings → Environment Variables):
+
+| Variable              | Description                                   |
+| --------------------- | --------------------------------------------- |
+| `AUTH_GOOGLE_ID`      | Google OAuth Client ID                        |
+| `AUTH_GOOGLE_SECRET`  | Google OAuth Client Secret                    |
+| `SITE_URL`            | Your site URL (http://localhost:5173 for dev) |
+| `GITHUB_ACCESS_TOKEN` | GitHub Personal Access Token                  |
+| `SLACK_BOT_TOKEN`     | Slack Bot User OAuth Token                    |
+| `SLACK_CHANNEL_ID`    | Slack Channel ID to monitor                   |
